@@ -1,0 +1,8 @@
+Number of Matches for AAAAAAAA and TTTTTTTT indexes:
+1
+Number of Matches for CCCCCCCC and GGGGGGGG indexes:
+1
+Number of Matches for AGAGAGAG index:
+0
+Number of Matches for GGCCGGCC index:
+0

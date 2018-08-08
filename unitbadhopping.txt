@@ -1,0 +1,3 @@
+Level of Index-Hopping:
+Index-Hopping occurred 1 time.
+This accounted for 33.33% of reads.
