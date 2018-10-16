@@ -82,9 +82,9 @@ with gzip.open(args.filename1, "rt") as file1:
 									if sequence2[:-1] == reverseseq(sequence3[:-1]) and sequence2[:-1] in indexdict:    #Checks that the index didn't hop and is
 										qscore_list1 = []                                                               #one of the good indexes we are looking for
 										qscore_list2 = []
-										for elem in qscore1[:-1]:
+										for elem in qscore2[:-1]:
 											qscore_list1.append(convert_phred(elem))
-										for item in qscore4[:-1]:
+										for item in qscore3[:-1]:
 											qscore_list2.append(convert_phred(item))
 										if sum(qscore_list1)/len(qscore_list1) < 25 or sum(qscore_list2)/len(qscore_list2) < 25:    #Checks that read has a good qscore
 											badqc1.write(header1[:-1] + ":" + sequence2)
@@ -118,13 +118,14 @@ with gzip.open(args.filename1, "rt") as file1:
 										bad2.write(header4[:-1] + ":" + sequence3)
 										bad2.write(sequence4)
 										bad2.write(comment4)
-										bad2.write(qscore4)                              #Writes reads that index hopped to the proper output files
+										bad2.write(qscore4)										#Writes reads that index hopped to the proper output files
+									ctr += 4 	
 for elem in indexdict:
 	indexdict[elem].close()
 	indexdict[reverseseq(elem)].close()							#Closes ouput files I wrote good outputs to 		
-indexhoppercent = hopctr/(1452986940/4)*100		                    #Gives a percent of index hopping 
+indexhoppercent = hopctr/(ctr/4)*100		                    #Gives a percent of index hopping 
 for key in goodctrdict:
-	goodctrdict[key] = goodctrdict[key]/(1452986940/4)*100          #Gives a percent of index hopping per index
+	goodctrdict[key] = goodctrdict[key]/(ctr/4)*100          #Gives a percent of reads from that index
 print("The indexes hopped " + str(hopctr) + " times") 
 print("The index hopped " + str(indexhoppercent) + "% of the time")
 print("Index" + "\t" + "Percent of Total Reads from Index")
